@@ -15,14 +15,17 @@ class ProjectsController < ApplicationController
 
 
     def update
+        @user = User.find(params[:user_id])
         @project = Project.find(params[:id])
         @project.update(project_params)
+
 
         if @project.save
             render json: @user.projects 
 
         else 
             render json: @project.errors
+            byebug
         end 
     end
 
