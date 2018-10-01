@@ -7,5 +7,10 @@ class UsersController < ApplicationController
     def projects
         @user = User.find(params[:id])
         render json: @user.projects
-    end 
+    end
+
+    def show
+        @user = User.find(params[:id])
+        render json: @user
+    end
 end
