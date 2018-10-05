@@ -1,5 +1,11 @@
 class ProjectsController < ApplicationController
 
+    def show
+        @projects = Project.all
+
+        render json: @projects
+    end
+
     def create
        @user = User.find(params[:user_id])
        @project = Project.new(user: @user, name: params[:name], content: params[:content])
@@ -29,9 +35,15 @@ class ProjectsController < ApplicationController
         end 
     end
 
+    def destroy
+        @project = Project.find(params[:id])
+        @project.delete
+
+    end
+
     private
 
     def project_params 
-        params.permit(:user_id, :name, :content)
+        params.permit(:user_id, :name, :content, :id)
     end
 end
